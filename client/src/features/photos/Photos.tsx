@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hook';
 import { fetchPhotos } from './photosThunk';
 import { Box } from '@mui/material';
 import Photo from './components/Photo';
+import Modal from '../../components/UI/Modal';
 
 const Photos = () => {
   const dispatch = useAppDispatch();
@@ -19,6 +20,8 @@ const Photos = () => {
       {photos.map((photo) => (
         <Photo photo={photo} visibleUser key={photo._id} />
       ))}
+
+      <Modal />
     </Box>
   );
 };

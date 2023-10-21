@@ -4,6 +4,7 @@ import { createPhoto, deletePhoto, fetchPhotos } from './photosThunk';
 
 interface State {
   photos: IPhoto[];
+  currentPhoto: IPhoto | null;
   photosLoading: boolean;
   createLoading: boolean;
   deleteLoading: string;
@@ -11,6 +12,7 @@ interface State {
 
 const initialState: State = {
   photos: [],
+  currentPhoto: null,
   photosLoading: false,
   createLoading: false,
   deleteLoading: '',
@@ -19,7 +21,11 @@ const initialState: State = {
 export const photosSlice = createSlice({
   name: 'photos',
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentPhoto: (state, { payload }) => {
+      state.currentPhoto = payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchPhotos.pending, (state) => {
       state.photosLoading = true;
@@ -55,3 +61,4 @@ export const photosSlice = createSlice({
 });
 
 export const photosReducer = photosSlice.reducer;
+export const { setCurrentPhoto } = photosSlice.actions;

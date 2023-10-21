@@ -10,12 +10,13 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import { Logout, AddPhotoAlternate } from '@mui/icons-material';
+import { Logout, AddPhotoAlternate, Collections } from '@mui/icons-material';
 import { IUserForUsing } from '../types';
 import { apiUrl } from '../constants';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../app/hook';
 import { setPrevEndpoint } from '../features/main/mainSlice';
+import { fetchPhotos } from '../features/photos/photosThunk';
 
 interface Props {
   user: IUserForUsing;
@@ -122,6 +123,17 @@ const ToolbarMenu: React.FC<Props> = ({ user, onLogout }) => {
             <AddPhotoAlternate />
           </ListItemIcon>
           New photo
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            navigate(`/photos/user/${user._id}`);
+            dispatch(fetchPhotos(user._id));
+          }}
+        >
+          <ListItemIcon>
+            <Collections />
+          </ListItemIcon>
+          My gallery
         </MenuItem>
         <MenuItem onClick={onLogout}>
           <ListItemIcon>

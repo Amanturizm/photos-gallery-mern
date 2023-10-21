@@ -6,6 +6,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { fetchPhotos } from '../photosThunk';
 import Photo from './Photo';
 import { setPrevEndpoint } from '../../main/mainSlice';
+import Modal from '../../../components/UI/Modal';
 
 const PhotosUser = () => {
   const dispatch = useAppDispatch();
@@ -51,6 +52,8 @@ const PhotosUser = () => {
           <Photo photo={photo} key={photo._id} />
         ))}
       </Box>
+
+      <Modal />
     </Box>
   );
 };
