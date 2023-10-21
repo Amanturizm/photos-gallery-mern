@@ -32,3 +32,14 @@ export interface IValidationError {
   name: string;
   _message: string;
 }
+
+export interface IPhoto {
+  _id: string;
+  user: { _id: string; avatar: string; displayName: string };
+  title: string;
+  image: string | null;
+}
+
+export interface IPhotoRequest extends Omit<IPhoto, '_id' | 'user' | 'image'> {
+  image: File | null;
+}

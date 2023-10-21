@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../app/hook';
 import ToolbarMenu from './ToolbarMenu';
 import { clearUser } from '../features/users/usersSlice';
 import { logout } from '../features/users/usersThunk';
+import { fetchPhotos } from '../features/photos/photosThunk';
 
 const CssButton = styled(Button)({
   ':hover': {
@@ -36,7 +37,11 @@ const AppToolbar = () => {
     <AppBar position="fixed">
       <Toolbar sx={{ bgcolor: '#121212' }}>
         <Typography variant="h5" component="div" sx={{ flexGrow: 1, letterSpacing: 1 }}>
-          <Link to="/" style={{ textDecoration: 'none', color: '#fff' }}>
+          <Link
+            to="/"
+            onClick={() => dispatch(fetchPhotos(null))}
+            style={{ textDecoration: 'none', color: '#fff' }}
+          >
             Photo Gallery
           </Link>
         </Typography>

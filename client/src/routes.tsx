@@ -1,10 +1,14 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Signup from './features/users/Signup';
 import Login from './features/users/Login';
+import Photos from './features/photos/Photos';
+import PhotosUser from './features/photos/componets/PhotosUser';
 
 const useRoutes = (isAuthenticated: boolean) => (
   <Routes>
-    {/* Route for everything */}
+    <Route path="/" element={<Photos />} />
+    <Route path="/photos" element={<Photos />} />
+    <Route path="/photos/user/:id" element={<PhotosUser />} />
     {!isAuthenticated ? (
       <>
         <Route path="/signup" element={<Signup />} />
