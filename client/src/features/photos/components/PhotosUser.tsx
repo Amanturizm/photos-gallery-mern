@@ -49,7 +49,7 @@ const PhotosUser = () => {
 
       <Box display="flex" flexWrap="wrap" gap={2}>
         {photos.map((photo) => (
-          <Photo photo={photo} key={photo._id} />
+          <Photo photo={photo} visibleDeleteButton key={photo._id} />
         ))}
       </Box>
 
