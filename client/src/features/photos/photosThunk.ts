@@ -13,7 +13,18 @@ export const fetchPhotos = createAsyncThunk<IPhoto[], string | null>(
 export const createPhoto = createAsyncThunk<void, IPhotoRequest>(
   'photos/createOne',
   async (photo) => {
-    await axiosApi.post('photos', photo);
+    const formData = new FormData();
+    const keys = Object.keys(photo) as (keyof IPhotoRequest)[];
+
+    keys.forEach((key) => {
+      const value = photo[key];
+
+      if (value !== undefined && value !== null) {
+        formData.append(key, value);
+      }
+    });
+
+    await axiosApi.post('photos', formData);
   },
 );
 

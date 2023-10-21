@@ -1,16 +1,18 @@
 import { IPhoto } from '../../types';
 import { createSlice } from '@reduxjs/toolkit';
-import { deletePhoto, fetchPhotos } from './photosThunk';
+import { createPhoto, deletePhoto, fetchPhotos } from './photosThunk';
 
 interface State {
   photos: IPhoto[];
   photosLoading: boolean;
+  createLoading: boolean;
   deleteLoading: string;
 }
 
 const initialState: State = {
   photos: [],
   photosLoading: false,
+  createLoading: false,
   deleteLoading: '',
 };
 
@@ -28,6 +30,16 @@ export const photosSlice = createSlice({
     });
     builder.addCase(fetchPhotos.rejected, (state) => {
       state.photosLoading = false;
+    });
+
+    builder.addCase(createPhoto.pending, (state) => {
+      state.createLoading = true;
+    });
+    builder.addCase(createPhoto.fulfilled, (state) => {
+      state.createLoading = false;
+    });
+    builder.addCase(createPhoto.rejected, (state) => {
+      state.createLoading = false;
     });
 
     builder.addCase(deletePhoto.pending, (state) => {

@@ -27,7 +27,7 @@ const Photo: React.FC<Props> = ({ photo, visibleUser }) => {
     <Card sx={{ width: 250, position: 'relative' }}>
       <CardActionArea>
         {photo.image && (
-          <CardMedia component="img" height="140" image={apiUrl + photo.image} alt="photo" />
+          <CardMedia component="img" height="180" image={apiUrl + photo.image} alt="photo" />
         )}
         <CardContent
           sx={{
@@ -47,7 +47,10 @@ const Photo: React.FC<Props> = ({ photo, visibleUser }) => {
               <Box display="flex">
                 <Typography
                   variant="body1"
-                  sx={{ cursor: 'pointer', ':hover': { textDecoration: 'underline' } }}
+                  sx={{
+                    cursor: 'pointer',
+                    ':hover': { textDecoration: 'underline' },
+                  }}
                   onClick={userClick}
                 >
                   {photo.user.displayName}
@@ -56,7 +59,13 @@ const Photo: React.FC<Props> = ({ photo, visibleUser }) => {
               </Box>
             )}
 
-            <Typography variant="h5" component="div">
+            <Typography
+              variant="h5"
+              width={200}
+              whiteSpace="nowrap"
+              overflow="hidden"
+              textOverflow="ellipsis"
+            >
               {photo.title}
             </Typography>
           </Box>

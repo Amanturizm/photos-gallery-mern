@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 
 interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   name: string;
   image?: File | null;
+  label?: string;
+  message?: string;
 }
 
-const FileInput: React.FC<Props> = ({ onChange, name, image }) => {
+const FileInput: React.FC<Props> = ({ onChange, name, image, label, message }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [filename, setFilename] = useState<string>('');
@@ -35,7 +37,7 @@ const FileInput: React.FC<Props> = ({ onChange, name, image }) => {
   };
 
   return (
-    <>
+    <Box display="flex" gap={2} sx={{ height: 53 }}>
       <input
         style={{ display: 'none' }}
         type="file"
@@ -43,14 +45,36 @@ const FileInput: React.FC<Props> = ({ onChange, name, image }) => {
         onChange={onFileChange}
         ref={inputRef}
       />
+
+      {label && (
+        <Typography
+          variant="h6"
+          sx={{
+            pl: 1.5,
+            border: '2px solid #222',
+            borderRadius: 2,
+            color: filename ? '#222' : message ? '#ff3333' : '#222',
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          {filename || message || label}
+        </Typography>
+      )}
+
       <Button
         variant="contained"
         onClick={activateInput}
-        sx={{ textTransform: 'none', width: 100, height: 53, overflow: 'hidden' }}
+        sx={{
+          textTransform: 'none',
+          width: 100,
+          overflow: 'hidden',
+        }}
       >
-        {filename || 'Browse'}
+        {label ? 'Browse' : filename || 'Browse'}
       </Button>
-    </>
+    </Box>
   );
 };
 

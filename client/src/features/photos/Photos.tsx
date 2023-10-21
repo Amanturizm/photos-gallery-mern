@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hook';
 import { fetchPhotos } from './photosThunk';
 import { Box } from '@mui/material';
-import Photo from './componets/Photo';
+import Photo from './components/Photo';
 
 const Photos = () => {
   const dispatch = useAppDispatch();
@@ -15,7 +15,7 @@ const Photos = () => {
   }, [photos, dispatch]);
 
   return (
-    <Box display="flex" gap={2} sx={{ p: 3 }}>
+    <Box display="flex" gap={2} flexWrap="wrap" sx={{ p: 3 }}>
       {photos.map((photo) => (
         <Photo photo={photo} visibleUser key={photo._id} />
       ))}

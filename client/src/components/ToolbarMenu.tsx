@@ -8,10 +8,14 @@ import {
   Menu,
   MenuItem,
   Tooltip,
+  Typography,
 } from '@mui/material';
-import { Logout } from '@mui/icons-material';
+import { Logout, AddPhotoAlternate } from '@mui/icons-material';
 import { IUserForUsing } from '../types';
 import { apiUrl } from '../constants';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../app/hook';
+import { setPrevEndpoint } from '../features/main/mainSlice';
 
 interface Props {
   user: IUserForUsing;
@@ -19,6 +23,10 @@ interface Props {
 }
 
 const ToolbarMenu: React.FC<Props> = ({ user, onLogout }) => {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const dispatch = useAppDispatch();
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const open = Boolean(anchorEl);
@@ -98,9 +106,23 @@ const ToolbarMenu: React.FC<Props> = ({ user, onLogout }) => {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem onClick={handleClose} sx={{ width: 200 }}>
-          <Avatar src={avatar} /> {user.displayName || user.username}
+          <Avatar src={avatar} />
+          <Typography variant="body1" whiteSpace="nowrap" overflow="hidden" textOverflow="ellipsis">
+            {user.displayName || user.username}
+          </Typography>
         </MenuItem>
         <Divider color="#ccc" />
+        <MenuItem
+          onClick={() => {
+            dispatch(setPrevEndpoint(pathname));
+            navigate('/new-photo');
+          }}
+        >
+          <ListItemIcon>
+            <AddPhotoAlternate />
+          </ListItemIcon>
+          New photo
+        </MenuItem>
         <MenuItem onClick={onLogout}>
           <ListItemIcon>
             <Logout fontSize="small" sx={{ color: '#fff', marginLeft: 0.5 }} />

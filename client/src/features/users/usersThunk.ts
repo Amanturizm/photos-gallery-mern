@@ -55,7 +55,9 @@ export const googleLogin = createAsyncThunk<
   { rejectValue: IValidationError }
 >('users/googleLogin', async (credential, { rejectWithValue }) => {
   try {
-    const { data } = await axiosApi.post<IRegisterResponse>('/users/google', { credential });
+    const { data } = await axiosApi.post<IRegisterResponse>('/users/google', {
+      credential,
+    });
 
     return data.user;
   } catch (e) {

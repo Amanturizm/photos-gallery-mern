@@ -98,7 +98,9 @@ usersRouter.post('/google', async (req, res, next) => {
       return res.status(400).send({ error: 'Not enough user data to continue' });
     }
 
-    let user = (await User.findOne({ googleID: id })) as HydratedDocument<IUserMethods>;
+    let user = (await User.findOne({
+      googleID: id,
+    })) as HydratedDocument<IUserMethods>;
 
     if (!user) {
       user = new User({

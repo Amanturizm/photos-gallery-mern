@@ -2,7 +2,8 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import Signup from './features/users/Signup';
 import Login from './features/users/Login';
 import Photos from './features/photos/Photos';
-import PhotosUser from './features/photos/componets/PhotosUser';
+import PhotosUser from './features/photos/components/PhotosUser';
+import PhotosForm from './features/photos/components/PhotosForm';
 
 const useRoutes = (isAuthenticated: boolean) => (
   <Routes>
@@ -16,7 +17,7 @@ const useRoutes = (isAuthenticated: boolean) => (
         <Route path="*" element={<Navigate to="/login" />} />
       </>
     ) : (
-      <>{/* Route for authorized users only */}</>
+      <Route path="/new-photo" element={<PhotosForm />} />
     )}
     <Route path="*" element={<Navigate to="/" />} />
   </Routes>
